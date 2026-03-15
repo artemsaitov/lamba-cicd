@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: 'S3 bucket for our CICD PR'
 
 Parameters:
-  Environment: 
+  Environment:
     Type: String
     Default: test
     AllowedValues:
@@ -13,6 +13,7 @@ Parameters:
 Resources:
   MyS3Bucket:
     Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Delete
     Properties:
       BucketName: !Sub '${AWS::StackName}-${Environment}-bucket'
       Tags:
@@ -20,7 +21,6 @@ Resources:
           Value: !Ref Environment
 
 Outputs:
-  BucketName: 
+  BucketName:
     Description: 'Name of created S3 Bucket'
     Value: !Ref MyS3Bucket
-
